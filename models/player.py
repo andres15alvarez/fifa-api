@@ -5,8 +5,12 @@ class Player(orm.Model, ResourceAddUpdateDelete):
 
     __tablename__ = 'Player'
     id = orm.Column(orm.Integer, primary_key=True)
-    name = orm.Column(orm.String(100), unique=True, nullable=False)
-    birthday = orm.Column(orm.DateTime)
+    name = orm.Column(orm.String(100), nullable=False)
+    birthdate = orm.Column(orm.DateTime)
+    club_id = orm.Column(orm.Integer, orm.ForeignKey('Club.id', ondelete='CASCADE'), nullable=False)
+    club = orm.relationship('Club', backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
+    nation_id = orm.Column(orm.Integer, orm.ForeignKey('Nation.id', ondelete='CASCADE'), nullable=False)
+    nation = orm.relationship('Nation', backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
     position = orm.relationship('Position', secondary=PlayerPosition, backref=orm.backref('player', lazy='dynamic', order_by='Player.name'))
 
     def __init__(self, name):
@@ -25,6 +29,8 @@ class PlayerSchema(ma.Schema):
 
     id = fields.Integer(dump_only=True)
     name = fields.String(required=True, validate=validate.Length(min=3, max=100))
-    birthday = fields.Date()
+    birthdate = fields.Date()
     url = ma.URLFor('api.playerresource', id='<id>', _external=True)
+    club = fields.Nested('ClubSchema', many=False, only=('name', 'url'))
+    nation = fields.Nested('NationSchema', many=False, only=('name', 'url'))
     position = fields.Nested('PositionSchema', many=True, only=('name', ))
