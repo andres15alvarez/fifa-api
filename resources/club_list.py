@@ -18,7 +18,7 @@ class ClubListResource(Resource):
             pagination_helper = PaginationHelper(
                 page_number=page_number,
                 query=Club.query.filter(Club.name.ilike(f'%{name_searched}%')),
-                resource_for_url='api.playerlistresource',
+                resource_for_url='api.clublistresource',
                 key_name='results',
                 schema=club_schema
             )
@@ -28,7 +28,7 @@ class ClubListResource(Resource):
         pagination_helper = PaginationHelper(
             page_number=page_number,
             query=Club.query,
-            resource_for_url='api.playerlistresource',
+            resource_for_url='api.clublistresource',
             key_name='results',
             schema=club_schema
         )
