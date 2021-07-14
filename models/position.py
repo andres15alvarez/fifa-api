@@ -6,7 +6,7 @@ class Position(orm.Model, ResourceAddUpdateDelete):
     __tablename__ = 'Position'
     id = orm.Column(orm.Integer, primary_key=True)
     name = orm.Column(orm.String(3), unique=True, nullable=False)
-    player = orm.relationship('Player', secondary=PlayerPosition, backref=orm.backref('position', lazy='dynamic', order_by='Position.name'))
+    player = orm.relationship('Player', secondary=PlayerPosition, backref=orm.backref('Position', lazy='dynamic', order_by='Position.name'))
 
     def __init__(self, name):
         self.name = name

@@ -11,7 +11,7 @@ class Player(orm.Model, ResourceAddUpdateDelete):
     club = orm.relationship('Club', backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
     nation_id = orm.Column(orm.Integer, orm.ForeignKey('Nation.id', ondelete='CASCADE'), nullable=False)
     nation = orm.relationship('Nation', backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
-    position = orm.relationship('Position', secondary=PlayerPosition, backref=orm.backref('player', lazy='dynamic', order_by='Player.name'))
+    position = orm.relationship('Position', secondary=PlayerPosition, backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
 
     def __init__(self, name):
         self.name = name
@@ -31,6 +31,6 @@ class PlayerSchema(ma.Schema):
     name = fields.String(required=True, validate=validate.Length(min=3, max=100))
     birthdate = fields.Date()
     url = ma.URLFor('api.playerresource', id='<id>', _external=True)
-    club = fields.Nested('ClubSchema', many=False, only=('name', 'url'))
-    nation = fields.Nested('NationSchema', many=False, only=('name', 'url'))
+    club = fields.Nested('ClubSchema', many=False, only=('name', ))
+    nation = fields.Nested('NationSchema', many=False, only=('name', ))
     position = fields.Nested('PositionSchema', many=True, only=('name', ))
