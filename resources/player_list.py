@@ -17,7 +17,7 @@ class PlayerListResource(Resource):
         if name_searched:
             pagination_helper = PaginationHelper(
                 page_number=page_number,
-                query=Player.query.filter(Player.name.like(f'%{name_searched}%')),
+                query=Player.query.filter(Player.name.ilike(f'%{name_searched}%')),
                 resource_for_url='api.playerlistresource',
                 key_name='results',
                 schema=player_schema
