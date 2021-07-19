@@ -1,5 +1,5 @@
 from models import orm, ma, ResourceAddUpdateDelete, fields, validate
-from .player_position import PlayerPosition
+from models.player_position import PlayerPosition
 
 class Player(orm.Model, ResourceAddUpdateDelete):
 
@@ -8,9 +8,9 @@ class Player(orm.Model, ResourceAddUpdateDelete):
     name = orm.Column(orm.String(100), nullable=False)
     birthdate = orm.Column(orm.DateTime)
     club_id = orm.Column(orm.Integer, orm.ForeignKey('Club.id', ondelete='CASCADE'), nullable=False)
-    club = orm.relationship('Club', backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
+    club = orm.relationship('Club', backref=orm.backref('players', lazy='dynamic', order_by='Player.name'))
     nation_id = orm.Column(orm.Integer, orm.ForeignKey('Nation.id', ondelete='CASCADE'), nullable=False)
-    nation = orm.relationship('Nation', backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
+    nation = orm.relationship('Nation', backref=orm.backref('players', lazy='dynamic', order_by='Player.name'))
     position = orm.relationship('Position', secondary=PlayerPosition, backref=orm.backref('Player', lazy='dynamic', order_by='Player.name'))
 
     def __init__(self, name):
@@ -31,6 +31,6 @@ class PlayerSchema(ma.Schema):
     name = fields.String(required=True, validate=validate.Length(min=3, max=100))
     birthdate = fields.Date()
     url = ma.URLFor('api.playerresource', id='<id>', _external=True)
-    club = fields.Nested('ClubSchema', many=False, only=('name', ))
-    nation = fields.Nested('NationSchema', many=False, only=('name', ))
+    club = fields.Nested('ClubSchema', many=False, only=('id', 'name', 'url'))
+    nation = fields.Nested('NationSchema', many=False, only=('id', 'name', 'url'))
     position = fields.Nested('PositionSchema', many=True, only=('name', ))

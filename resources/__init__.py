@@ -10,7 +10,6 @@ from resources.nation_list import NationListResource
 blueprint = Blueprint('api', __name__)
 api = Api(blueprint)
 
-# TODO: Add resources
 api.add_resource(PlayerListResource, '/player')
 api.add_resource(PlayerResource, '/player/<int:id>')
 api.add_resource(ClubListResource, '/club')

@@ -22,5 +22,5 @@ class ClubSchema(ma.Schema):
 
     id = fields.Integer(dump_only=True)
     name = fields.String(required=True, validate=validate.Length(min=3, max=100))
-    url = ma.URLFor('api.clubresource', id='<id>', _external=True)
     players = fields.Nested('PlayerSchema', many=True, exclude=('club', ))
+    url = ma.URLFor('api.clubresource', id='<id>', _external=True)
