@@ -1,6 +1,7 @@
 from models import orm, ma, ResourceAddUpdateDelete, fields, validate
 from models.player_position import PlayerPosition
 
+
 class Player(orm.Model, ResourceAddUpdateDelete):
 
     __tablename__ = 'Player'
@@ -15,14 +16,6 @@ class Player(orm.Model, ResourceAddUpdateDelete):
 
     def __init__(self, name):
         self.name = name
-
-    @classmethod
-    def is_name_unique(cls, id, name):
-        player_name = cls.query.filter_by(name=name).first()
-        if player_name is None:
-            return False
-        else:
-            return player_name.id == id
 
 
 class PlayerSchema(ma.Schema):

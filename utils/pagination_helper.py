@@ -1,6 +1,7 @@
 from flask import url_for
 from flask import current_app
 
+
 class PaginationHelper:
 
     def __init__(self, page_number, query, resource_for_url, key_name, schema):

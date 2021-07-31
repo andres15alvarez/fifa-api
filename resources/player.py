@@ -2,7 +2,9 @@ from flask_restful import Resource
 from utils.http_status import HttpStatus
 from models.player import Player, PlayerSchema
 
+
 player_schema = PlayerSchema()
+
 
 class PlayerResource(Resource):
 

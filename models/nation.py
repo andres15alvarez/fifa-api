@@ -1,5 +1,6 @@
 from models import orm, ma, ResourceAddUpdateDelete, fields, validate
 
+
 class Nation(orm.Model, ResourceAddUpdateDelete):
 
     __tablename__ = 'Nation'

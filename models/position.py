@@ -1,5 +1,6 @@
 from models import orm, ma, ResourceAddUpdateDelete, fields, validate
-from .player_position import PlayerPosition
+from models.player_position import PlayerPosition
+
 
 class Position(orm.Model, ResourceAddUpdateDelete):
 

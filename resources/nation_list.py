@@ -4,7 +4,9 @@ from utils.http_status import HttpStatus
 from utils.pagination_helper import PaginationHelper
 from models.nation import Nation, NationSchema
 
+
 nation_schema = NationSchema()
+
 
 class NationListResource(Resource):
 

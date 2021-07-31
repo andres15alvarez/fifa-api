@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class HttpStatus(Enum):
     continue_100 = 100    
     switching_protocols_101 = 101    
@@ -53,7 +54,7 @@ class HttpStatus(Enum):
         return 100 <= status_code.value <= 199
 
     @staticmethod
-    def is_sucess(status_code):
+    def is_success(status_code):
         return 200 <= status_code.value <= 299
 
     @staticmethod

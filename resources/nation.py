@@ -2,7 +2,9 @@ from flask_restful import Resource
 from utils.http_status import HttpStatus
 from models.nation import Nation, NationSchema
 
+
 nation_schema = NationSchema()
+
 
 class NationResource(Resource):
 

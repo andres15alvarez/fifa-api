@@ -1,5 +1,6 @@
 from models import orm, ma, ResourceAddUpdateDelete, fields, validate
 
+
 class Club(orm.Model, ResourceAddUpdateDelete):
 
     __tablename__ = 'Club'
@@ -11,11 +12,11 @@ class Club(orm.Model, ResourceAddUpdateDelete):
 
     @classmethod
     def is_name_unique(cls, id, name):
-        nation_name = cls.query.filter_by(name=name).first()
-        if nation_name is None:
+        club_name = cls.query.filter_by(name=name).first()
+        if club_name is None:
             return False
         else:
-            return nation_name.id == id
+            return club_name.id == id
 
 
 class ClubSchema(ma.Schema):

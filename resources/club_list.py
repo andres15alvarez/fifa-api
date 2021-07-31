@@ -4,7 +4,9 @@ from utils.http_status import HttpStatus
 from utils.pagination_helper import PaginationHelper
 from models.club import Club, ClubSchema
 
+
 club_schema = ClubSchema()
+
 
 class ClubListResource(Resource):
 
